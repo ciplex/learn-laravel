@@ -19,4 +19,8 @@ Route::get('/login', 'LoginController@index');
 
 Route::get('/student', 'StudentController@index');
 
+Route::get('/student/create', ['uses' => 'StudentController@create', 'as' => 'student.create']);
+
+Route::post('/student/create', ['uses' => 'StudentController@store', 'as' => 'student.store']);
+
 

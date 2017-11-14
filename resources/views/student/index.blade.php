@@ -5,6 +5,9 @@
 @section('content')
 
 <h1>Data Siswa</h1>
+<form class="form-inline my-2 my-lg-0 ml-auto">
+      <a href="{{route('student.create')}}" class="btn btn-outline-primary my-2 my-sm-0">Tambah Data</a>
+    </form>
 <table class="table table-hover table-striped table-dark">
   <thead>
     <tr>
