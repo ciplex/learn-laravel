@@ -16,6 +16,7 @@
     <th scope="col">Alamat</th>
     <th scope="col">Umur</th>
     <th scope="col">Email</th>
+    <th scope="col">Action</th>
     </tr>
   </thead>
   <tbody>
@@ -26,7 +27,14 @@
         <td>{{ $student->address }}</td>
         <td>{{ $student->age }}</td>
         <td>{{ $student->email }}</td>
-    </tr>
+        <td>
+          <form method="POST" action="{{route('student.destroy', $student->id) }}">
+            <input type="hidden" name="_method" value="delete" />
+            {{ csrf_field() }}
+            <button type="submit" onclick="return confirm('Hapus {{ $student->name }} ?')" class="btn btn-danger">Hapus</button>
+          </form>    
+            
+        </tr>
     @endforeach
   </tbody>
 </table>

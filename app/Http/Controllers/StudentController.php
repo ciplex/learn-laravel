@@ -35,7 +35,17 @@ class StudentController extends Controller
             'email' => $request->input('email'),
             ]);
         // dd($request->all());
-            return redirect('/student');
+            return redirect('/student');       
+    }
+    public function destroy($id)
+    {
+        $student = $this->student->find($id);
+
+        if($student) 
+        {
+            $student->delete();
+        }
+        return redirect()->back();
             
     }
 }
