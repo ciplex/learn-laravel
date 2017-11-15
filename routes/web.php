@@ -23,6 +23,11 @@ Route::get('/student/create', ['uses' => 'StudentController@create', 'as' => 'st
 
 Route::post('/student/create', ['uses' => 'StudentController@store', 'as' => 'student.store']);
 
-Route::delete('/student/destroy', ['uses' => 'StudentController@destroy', 'as' => 'student.destroy']);
+// Route::delete('/student/destroy', ['uses' => 'StudentController@destroy', 'as' => 'student.destroy']);
 
-Route::delete('/student/destroy/{id}', ['uses' => 'StudentController@destroy', 'as' => 'student.destroy']);
+Route::get('/student/destroy/{id}', ['uses' => 'StudentController@destroy', 'as' => 'student.destroy']);
+
+Route::get('/student/edit/{id}', ['uses' => 'StudentController@edit', 'as' => 'student.edit']);
+
+
+Route::put('/student/update/{id}', ['uses' => 'StudentController@update', 'as' => 'student.update']);

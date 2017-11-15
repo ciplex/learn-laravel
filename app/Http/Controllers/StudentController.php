@@ -37,6 +37,24 @@ class StudentController extends Controller
         // dd($request->all());
             return redirect('/student');       
     }
+
+    public function edit($id)
+    {
+       $student = $this->student->find($id);
+
+        return view('student.edit', compact('student'));
+    }
+
+    public function update($id, StudentRequest $request)
+    {
+        $student = $this->student->find($id);
+
+        if($student){
+            $student->update($request->all());
+        }
+        return redirect('/student');
+    }
+
     public function destroy($id)
     {
         $student = $this->student->find($id);

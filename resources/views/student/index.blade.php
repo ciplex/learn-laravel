@@ -33,7 +33,7 @@
             {{ csrf_field() }}
             <button type="submit" onclick="return confirm('Hapus {{ $student->name }} ?')" class="btn btn-danger">Hapus</button>
           </form>    
-            
+            <a class="btn btn-primary" href="{{ route('student.edit', $student->id) }}">Update</a>
         </tr>
     @endforeach
   </tbody>

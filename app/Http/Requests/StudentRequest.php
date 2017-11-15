@@ -27,7 +27,7 @@ class StudentRequest extends FormRequest
             'name' => 'required',
             'address' => 'required',
             'email' =>'required|email|unique:students',
-            'age' => 'required|email|unique:students'
+            'age' => 'required|numeric'
         ];
     }
 
