@@ -5,7 +5,7 @@
 @section('content')
 
 
-<form class="container" method="POST" action="{{ route('student.store') }}">
+<form class="container" enctype="multipart/form-data" method="POST" action="{{ route('student.store') }}">
   {{ csrf_field() }}
   <div class="form-group">
     <label for="input">Nama</label>
@@ -37,6 +37,10 @@
         @endif
   <button type="submit" class="btn btn-primary">Submit</button>
 </form>
+<div class="form-group">
+    <label >Photo</label>
+    <input type="file" class="form-control" name="photo" placeholder="Enter Email">
+  </div>
 </br>
     @if($errors->any())
       <div class="alert alert-danger mt-3 ml-3">

@@ -54,5 +54,5 @@
     @endforeach
   </tbody>
 </table>
- {{ $students->render() }}
+{{ $students->render() }}
 @stop

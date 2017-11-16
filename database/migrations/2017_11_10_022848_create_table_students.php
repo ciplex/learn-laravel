@@ -19,6 +19,7 @@ class CreateTableStudents extends Migration
             $table->string('address');
             $table->integer('age');
             $table->string('email')->unique();
+            $table->string('photo')->nullable();
             $table->timestamps();
         });
     }
