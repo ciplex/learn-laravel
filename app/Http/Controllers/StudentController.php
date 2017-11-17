@@ -24,7 +24,7 @@ class StudentController extends Controller
     }
     public function index()
     {
-        $students = $this->student->paginate(10);
+        $students = $this->student->orderBy('id', 'DESC')->paginate(10);
 
         return view('student.index', compact('students'));
     }
@@ -72,10 +72,17 @@ class StudentController extends Controller
 
     public function update($id, StudentRequest $request)
     {
+        $studentForm = $request->except('photo');
+        
+        if($request->hasFile('photo'))
+        {
+         $studentForm['photo'] = $this->generatePhoto($request->file('photo'), $studentForm);
+        }
+
         $student = $this->student->find($id);
 
         if($student){
-            $student->update($request->all());
+            $student->update($studentForm);
         }
 
         session()->flash('success_message', 'Data terupdate');
