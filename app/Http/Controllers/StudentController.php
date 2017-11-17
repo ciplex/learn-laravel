@@ -5,12 +5,16 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Filesystem\Filesystem;
 use App\Http\Requests\StudentRequest;
-use Intervation\Image\ImageManager;
+use Intervention\Image\ImageManager;
 use App\Student;
 
 class StudentController extends Controller
 {
     private $student;
+
+    private $filesystem;
+
+    private $imageManager;
 
     public function __construct(Student $student, Filesystem $filesystem, ImageManager $imageManager)
     {
@@ -44,19 +48,19 @@ class StudentController extends Controller
 
     public function store(StudentRequest $request)
     {
-        
-        $this->student->create([
-            'name' => $request->input('name'),
-            'address' => $request->input('address'),
-            'age' => $request->input('age'),
-            'email' => $request->input('email'),
-            ]);
-        // dd($request->all());
+        // dapetin data inputan kecuali photo
+        $student = $request->except("photo");
+        // cek jika upload photo
+        if($request->hasFile('photo'))
+        {
+         $student['photo'] = $this->generatePhoto($request->file('photo'), $request->except('photo'));
+        }
+         $this->student->create($student);
+           
         session()->flash('success_message', 'Data tersimpan');
             return redirect('/student');
                   
     }
-
     public function edit($id)
     {
        $student = $this->student->find($id);
@@ -89,5 +93,14 @@ class StudentController extends Controller
         }
         return redirect()->back();
             
+    }
+
+    private function generatePhoto($photo, $data)
+    {
+        $filename = date('YmdHis').'-'.snake_case($data['name']).".".$this->filesystem->extension($photo->getCLientOriginalName());
+        $path = public_path("photos/").$filename;
+        
+        $this->imageManager->make($photo->getRealPath())->save($path);
+        return "/photos/".$filename;
     }
 }

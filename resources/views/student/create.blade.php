@@ -35,12 +35,12 @@
   @if($errors->first('email'))
           <p style="color: red">{{ $errors->first('email') }}</p>
         @endif
-  <button type="submit" class="btn btn-primary">Submit</button>
-</form>
-<div class="form-group">
+      <div class="form-group">
     <label >Photo</label>
     <input type="file" class="form-control" name="photo" placeholder="Enter Email">
   </div>
+  <button type="submit" class="btn btn-primary">Submit</button>
+</form>
 </br>
     @if($errors->any())
       <div class="alert alert-danger mt-3 ml-3">
