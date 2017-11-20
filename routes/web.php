@@ -15,9 +15,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/login', 'LoginController@index');
+Route::get('/login', ['uses' => 'AuthController@login', 'as' => 'auth.login']);
 
-Route::get('/student', 'StudentController@index');
+Route::post('/login', ['uses' => 'AuthController@authenticate', 'as' => 'auth.auth']);
+
+Route::get('/student', 'StudentController@index')->middleware('auth');
 
 Route::get('/student/search', ['uses' => 'StudentController@search', 'as' => 'student.search']);
 
@@ -33,3 +35,7 @@ Route::get('/student/edit/{id}', ['uses' => 'StudentController@edit', 'as' => 's
 
 Route::put('/student/update/{id}', ['uses' => 'StudentController@update', 'as' => 'student.update']);
 
+
+
+
+// Route::get('/home', 'HomeController@index')->name('home');
