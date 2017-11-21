@@ -19,7 +19,13 @@ Route::get('/login', ['uses' => 'AuthController@login', 'as' => 'auth.login']);
 
 Route::post('/login', ['uses' => 'AuthController@authenticate', 'as' => 'auth.auth']);
 
-Route::get('/student', 'StudentController@index')->middleware('auth');
+Route::get('/logout', ['uses' => 'AuthController@destroy', 'as' => 'auth.destroy']);
+
+
+Route::group(['middleware' => 'verify.auth'], function() {
+
+
+Route::get('/student', 'StudentController@index');
 
 Route::get('/student/search', ['uses' => 'StudentController@search', 'as' => 'student.search']);
 
@@ -35,7 +41,7 @@ Route::get('/student/edit/{id}', ['uses' => 'StudentController@edit', 'as' => 's
 
 Route::put('/student/update/{id}', ['uses' => 'StudentController@update', 'as' => 'student.update']);
 
-
+});
 
 
 // Route::get('/home', 'HomeController@index')->name('home');
